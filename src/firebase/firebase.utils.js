@@ -51,6 +51,8 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     return userRef;
 }
 
+// end of Storing data (users) to firestore
+
 // Google Sign In Utility
 
 const provider = new firebase.auth.GoogleAuthProvider()

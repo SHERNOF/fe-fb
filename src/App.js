@@ -30,9 +30,13 @@ componentDidMount(){
   //   // this.setState({ currentUser: user })
   //   // createUserProfileDocument(user)
 
+  // putting the user data from firestore to App to be usable
+
     if(userAuth){
       const userRef = await createUserProfileDocument(userAuth)
+      console.log(userRef)
       userRef.onSnapshot(snapshot => {
+        // console.log(snapshot)
         this.setState({
           currentUser: {
             id: snapshot.id,
@@ -43,9 +47,13 @@ componentDidMount(){
         // console.log(this.state)
       })
     }
+    
     this.setState({ currentUser: userAuth })  
   }) 
 }
+
+// end of putting the user data from firestore to App to be usable
+
 componentWillUnmount(){
   this.unsubscribeFromAuth()
 }
