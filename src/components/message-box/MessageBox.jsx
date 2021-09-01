@@ -6,7 +6,7 @@ export default function MessageBox({status, message}) {
 
    
     return (
-      <div className={`messageBox ${status}`}>
+      <div className={`messageBox flag ${status}`}>
         <h6 className={status}>{message}</h6> 
     </div>
       

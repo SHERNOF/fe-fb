@@ -50,8 +50,13 @@ export default class SignIn extends Component {
                         <CustomButton type="button" onClick={ signInWithGoogle } isGoogleSignIn> Sign In with Google </CustomButton>
                     </div>
                 </form>
+{/* 
+                {this.state.message ? setTimeout(() => (<MessageBox status="error" message={this.state.message}></MessageBox>), 1000 ) : ''} */}
 
-                {this.state.message ? setTimeout(() => (<MessageBox status="error" message={this.state.message}></MessageBox>), 1000 ) : ''}
+
+        {
+        this.state.message ? <MessageBox status="error" message={this.state.message}></MessageBox> : ''
+        }
                 
             </div>
         )

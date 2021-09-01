@@ -3,6 +3,7 @@ import CustomButton from '../custom-button/CustomButton'
 import FormInput from '../form-input/FormInput'
 import './signup.scss'
 import { auth, createUserProfileDocument } from '../../firebase/firebase.utils.js';
+import MessageBox from '../message-box/MessageBox';
 
 
 export default class Signup extends Component {
@@ -13,7 +14,8 @@ export default class Signup extends Component {
             displayName: '',
             email: '',
             password: '',
-            confirmPassword: ''
+            confirmPassword: '',
+            message: ''
         }
     }
 
@@ -21,7 +23,8 @@ export default class Signup extends Component {
         event.preventDefault();
         const { displayName, email, password, confirmPassword } = this.state;
         if (password !== confirmPassword) {
-          alert("passwords don't match");
+          // alert("passwords don't match");
+          this.setState({ message: 'password don\'t match' })
           return;
         }
     
@@ -41,6 +44,9 @@ export default class Signup extends Component {
           });
         } catch (error) {
           console.log(error);
+          if(error){
+            this.setState({ message: error.message })
+          }
         }
       };
 
@@ -93,6 +99,11 @@ export default class Signup extends Component {
                     
 
                 </form>
+
+                {
+                  this.state.message ? <MessageBox status='error' message={this.state.message }></MessageBox> : ''
+                }
+                
 
 
             </div>
