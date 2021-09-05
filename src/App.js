@@ -1,6 +1,6 @@
 
 import { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 import Header from './components/header/Header';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
@@ -66,9 +66,13 @@ componentWillUnmount(){
       <div >
         <Header />
         <Switch>
-          <Route exact path='/' component={Homepage}></Route>
-          <Route path='/shop' component={Shoppage}></Route>
-          <Route path='/signin' component={SignInAndSignUp}></Route>
+        {/* <Route exact path='/' component={Homepage} /> */}
+          <Route exact path='/' render={ () => !this.props.currentUser ? (<Redirect to='/signin'c/>) : (<Homepage/>) } />
+          <Route path='/shop' component={Shoppage} />
+
+          {/* <Route path='/signin' component={SignInAndSignUp}></Route> */}
+          <Route exact path='/signin' render={ () => this.props.currentUser ? (<Redirect to='/' />) : (<SignInAndSignUp />) } />
+          
         </Switch>
         {/* <Homepage></Homepage> */}
       </div>
@@ -76,8 +80,12 @@ componentWillUnmount(){
   }
 
 }
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser
+})
+
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
 })
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
