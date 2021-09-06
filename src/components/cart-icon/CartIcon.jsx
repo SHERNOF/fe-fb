@@ -17,6 +17,4 @@ import { toggleCartHidden } from '../../redux/cart/cart.actions'
 const mapDispatchToProps = dispatch => ({
     toggleCartHidden: () => dispatch(toggleCartHidden())
 })
-
-
 export default connect(null, mapDispatchToProps)(CartIcon)
