@@ -10,6 +10,9 @@ import Shoppage from './pages/shop/Shoppage';
 import SignInAndSignUp from './pages/SignInAndSignUp/SignInAndSignUp';
 import { connect } from 'react-redux'
 import { setCurrentUser } from './redux/user/user.actions'
+import { createStructuredSelector } from 'reselect'
+import { selectCurrentUSer } from './redux/user/user.selector';
+import Checkout from './pages/checkout/Checkout';
 
 
 
@@ -72,7 +75,8 @@ componentWillUnmount(){
 
           {/* <Route path='/signin' component={SignInAndSignUp}></Route> */}
           <Route exact path='/signin' render={ () => this.props.currentUser ? (<Redirect to='/' />) : (<SignInAndSignUp />) } />
-          
+          <Route exact path='/checkout' component={ Checkout } />
+
         </Switch>
         {/* <Homepage></Homepage> */}
       </div>
@@ -80,8 +84,8 @@ componentWillUnmount(){
   }
 
 }
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUSer
 })
 
 const mapDispatchToProps = dispatch => ({
